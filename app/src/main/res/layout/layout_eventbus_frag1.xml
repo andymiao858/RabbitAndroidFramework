@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:background="@android:color/holo_red_light">
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="EventBusFragment#1"
+		android:textSize="35sp"
+		android:layout_alignParentTop="true"/>
+
+	<include
+		android:id="@+id/eventbus_frag1_text1"
+		layout="@layout/layout_eventbus_text"></include>
+
+	<Button
+		android:id="@+id/eventbus_frag1_btn"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/eventbus_frag1_text1"
+		android:layout_centerHorizontal="true"
+		android:text="Increment"/>
+
+
+</RelativeLayout>

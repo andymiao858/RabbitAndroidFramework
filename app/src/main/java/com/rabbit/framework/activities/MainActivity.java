@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
 		mainList = (ListView) findViewById(R.id.main_list_view);
 		mainList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ITEM));
-		mainList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+		mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -78,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	String[] ITEM = new String[]{
-		ButterKnifeSampleActivity.class.getSimpleName()
+			ButterKnifeSampleActivity.class.getSimpleName(),
+			EventbusSampleActivity.class.getSimpleName()
 	};
 
 }
