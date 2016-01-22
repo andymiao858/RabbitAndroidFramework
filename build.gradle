@@ -7,6 +7,12 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.5.0'
 
+        // The android-apt plugin assists in working with annotation processors in combination with Android Studio. It has two purposes:
+        // Allow to configure a compile time only annotation processor as a dependency, not including the artifact in the final APK or library
+        // Set up the source paths so that code that is generated from the annotation processor is correctly picked up by Android Studio.
+
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
