@@ -1,3 +1,0 @@
-[submodule "ext/android-volley"]
-	path = ext/android-volley
-	url = https://github.com/andymiao858/android-volley.git
