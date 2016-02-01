@@ -2,16 +2,24 @@ package com.rabbit.framework.utils.log;
 
 import android.util.Log;
 
+import com.rabbit.framework.BuildConfig;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
 /**
  * @author miaohd
  */
-public class RabbitLog {
+public class RLog {
 
 	private final static String TAG = "Rabbit";
 	private final static int LOG_TEXT_MAX_LENGTH = 4000;
+	private final static boolean VERBOSE_ENABLED = BuildConfig.LOG_LEVEL >= Log.VERBOSE;
+	private final static boolean DEBUG_ENABLED = BuildConfig.LOG_LEVEL >= Log.DEBUG;
+	private final static boolean INFO_ENABLED = BuildConfig.LOG_LEVEL >= Log.INFO;
+	private final static boolean WARN_ENABLED = BuildConfig.LOG_LEVEL >= Log.WARN;
+	private final static boolean ERROR_ENABLED = BuildConfig.LOG_LEVEL >= Log.ERROR;
+
 
 	public static void v(Object message) {
 		v(TAG, message);
@@ -63,15 +71,7 @@ public class RabbitLog {
 
 	private static void print(int logLevel, String tag, Object message) {
 
-		if (isTest() == false) {
-			return;
-		}
-
 		checkMessageLength(logLevel, tag, String.valueOf(message));
-	}
-
-	private static boolean isTest() {
-		return true; // TODO
 	}
 
 	private static void checkMessageLength(int logLevel, String tag, String msg) {
@@ -90,19 +90,19 @@ public class RabbitLog {
 
 		switch (logLevel) {
 			case Log.VERBOSE:
-				Log.v(tag, message);
+				if (VERBOSE_ENABLED) Log.v(tag, message);
 				break;
 			case Log.DEBUG:
-				Log.d(tag, message);
+				if (DEBUG_ENABLED) Log.d(tag, message);
 				break;
 			case Log.INFO:
-				Log.i(tag, message);
+				if (INFO_ENABLED) Log.i(tag, message);
 				break;
 			case Log.WARN:
-				Log.w(tag, message);
+				if (WARN_ENABLED) Log.w(tag, message);
 				break;
 			case Log.ERROR:
-				Log.e(tag, message);
+				if (ERROR_ENABLED) Log.e(tag, message);
 				break;
 			default:
 				break;

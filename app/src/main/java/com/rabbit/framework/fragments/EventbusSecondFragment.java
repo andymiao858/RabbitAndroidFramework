@@ -12,7 +12,7 @@ import com.rabbit.framework.R;
 import com.rabbit.framework.handler.IEventBusHandler;
 import com.rabbit.framework.models.event.IncrementMessageEvent;
 import com.rabbit.framework.models.event.MessageEvent;
-import com.rabbit.framework.utils.log.RabbitLog;
+import com.rabbit.framework.utils.log.RLog;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -42,7 +42,7 @@ public class EventbusSecondFragment extends BaseSubscriberFragment implements IE
 
 	@Override
 	public void onEventMainThread(MessageEvent messageEvent) {
-		RabbitLog.d("EventbusSecondFragment received messageEvent data --> " + messageEvent.getData().toString());
+		RLog.d("EventbusSecondFragment received messageEvent data --> " + messageEvent.getData().toString());
 		if (messageEvent instanceof IncrementMessageEvent){
 			int number = ((IncrementMessageEvent)messageEvent).getData();
 			textView.setText(String.valueOf(number));

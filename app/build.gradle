@@ -7,17 +7,51 @@ android {
 
     defaultConfig {
         applicationId "com.rabbit.framework"
-        minSdkVersion 23
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        buildConfigField('String', 'API_VERSION', '\"v' + versionName + '\"')
     }
     buildTypes {
+
+        debug {
+            multiDexEnabled true
+            jniDebuggable   true
+            manifestPlaceholders = ['APP_NAME': 'Rabbit-Debug']
+            buildConfigField('com.rabbit.framework.config.PhaseEnum', 'PHASE', 'com.rabbit.framework.config.PhaseEnum.ALPHA')
+            buildConfigField('int', 'LOG_LEVEL', 'android.util.Log.VERBOSE')
+        }
+
+        alpha {
+            multiDexEnabled true
+            manifestPlaceholders = ['APP_NAME': 'Rabbit-α']
+            buildConfigField('com.rabbit.framework.config.PhaseEnum', 'PHASE', 'com.rabbit.framework.config.PhaseEnum.ALPHA')
+            buildConfigField('int', 'LOG_LEVEL', 'android.util.Log.VERBOSE')
+        }
+
+        beta {
+            multiDexEnabled true
+            manifestPlaceholders = ['APP_NAME': 'Rabbit-β']
+            buildConfigField('com.rabbit.framework.config.PhaseEnum', 'PHASE', 'com.rabbit.framework.config.PhaseEnum.BETA')
+            buildConfigField('int', 'LOG_LEVEL', 'android.util.Log.VERBOSE')
+        }
+
         release {
-            minifyEnabled false
+            multiDexEnabled true
+            manifestPlaceholders = ['APP_NAME': 'Rabbit']
+            buildConfigField('com.rabbit.framework.config.PhaseEnum', 'PHASE', 'com.rabbit.framework.config.PhaseEnum.RELEASE')
+            buildConfigField('int', 'LOG_LEVEL', 'android.util.Log.ERROR')
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+
+
+    }
+
 }
 
 dependencies {
