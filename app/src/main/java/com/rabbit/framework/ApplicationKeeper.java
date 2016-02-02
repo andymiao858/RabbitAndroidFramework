@@ -18,7 +18,7 @@ package com.rabbit.framework;
 import android.app.Application;
 import android.content.Context;
 
-import com.rabbit.framework.utils.log.RLog;
+import com.rabbit.framework.utils.RLog;
 
 /**
  * @author miaohd
@@ -31,7 +31,7 @@ public class ApplicationKeeper {
 
 	public static void attach(Application application){
 		if (app == null){
-			synchronized (app){
+			synchronized (TAG){
 				if (app == null){
 					app = application;
 				}

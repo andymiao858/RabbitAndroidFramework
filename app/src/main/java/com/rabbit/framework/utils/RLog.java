@@ -1,4 +1,4 @@
-package com.rabbit.framework.utils.log;
+package com.rabbit.framework.utils;
 
 import android.util.Log;
 

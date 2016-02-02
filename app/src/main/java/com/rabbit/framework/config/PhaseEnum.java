@@ -29,7 +29,7 @@ public enum PhaseEnum {
 
 	public static final String ALPHA_API_DOMAIN = "http://www.baidu.com";
 	// just show an example how to use apiVersion var
-	public static final String BETA_API_DOMAIN = "http://www.baidu.com/" + BuildConfig.API_VERSION + "/";
+	public static final String BETA_API_DOMAIN = "http://www.baidu.com/" + BuildConfig.API_VERSION;
 	public static final String RELEASE_API_DOMAIN = "http://www.baidu.com";
 
 	private final String apiDomain;

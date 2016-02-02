@@ -17,17 +17,64 @@ package com.rabbit.framework.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.ScrollingMovementMethod;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.rabbit.framework.R;
+import com.rabbit.framework.api.SearchApi;
+import com.rabbit.framework.utils.RLog;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * @author miaohd
  */
 public class VolleySampleActivity extends Activity {
 
+	@Bind(R.id.search)
+	Button searchButton;
+
+	@Bind(R.id.showWindow)
+	TextView web;
+
+	@OnClick(R.id.search)
+	void search(){
+		SearchApi.search("RabbitAndroidFramework", String.class, new Response.Listener<String>() {
+			@Override
+			public void onResponse(String response) {
+				RLog.d(response);
+				web.setMovementMethod(ScrollingMovementMethod.getInstance());
+				web.setText(Html.fromHtml(response));
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				RLog.e(error.getMessage());
+			}
+		});
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_volley);
+		ButterKnife.bind(this);
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+	}
 
+	@Override
+	protected void onDestroy() {
 
+		super.onDestroy();
+	}
 }

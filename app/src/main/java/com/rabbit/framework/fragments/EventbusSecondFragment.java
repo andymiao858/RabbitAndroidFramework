@@ -12,7 +12,7 @@ import com.rabbit.framework.R;
 import com.rabbit.framework.handler.IEventBusHandler;
 import com.rabbit.framework.models.event.IncrementMessageEvent;
 import com.rabbit.framework.models.event.MessageEvent;
-import com.rabbit.framework.utils.log.RLog;
+import com.rabbit.framework.utils.RLog;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
