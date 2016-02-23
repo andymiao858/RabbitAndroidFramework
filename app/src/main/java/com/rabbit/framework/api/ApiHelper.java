@@ -23,7 +23,9 @@ import com.android.volley.toolbox.RabbitGsonRequest;
 import com.android.volley.toolbox.RabbitStringRequest;
 import com.android.volley.toolbox.RabbitVolley;
 import com.rabbit.framework.config.RabbitConfig;
+import com.rabbit.framework.utils.StringUtils;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,26 +78,36 @@ public final class ApiHelper {
 		return headers;
 	}
 
-	private static String buildUrl(int method, String uri, Map<String, String> params) {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append(URL_PREFIX);
-		stringBuilder.append(uri);
+	public static String buildUrl(int method, String uri, Map<String, String> params) {
+		String url;
+		if (StringUtils.isBlank(uri)){
+			url = URL_PREFIX;
+		}else {
+			Uri parseUri = Uri.parse(uri);
+			String scheme = parseUri.getScheme();
+			if (StringUtils.isBlank(scheme)){
+				url = URL_PREFIX + uri;
+			}else {
+				url = uri;
+			}
+
+		}
 		switch (method) {
 			case Request.Method.GET:
 			case Request.Method.DELETE:
 				if (params != null && !params.isEmpty()) {
-					Uri.Builder uriBuilder = Uri.parse(stringBuilder.toString()).buildUpon();
+					Uri.Builder uriBuilder = Uri.parse(url).buildUpon();
 					for (Map.Entry<String, String> entry : params.entrySet()) {
 						uriBuilder.appendQueryParameter(entry.getKey(), entry.getValue());
 					}
 					return uriBuilder.build().toString();
 				} else {
-					return stringBuilder.toString();
+					return url;
 				}
 			case Request.Method.POST:
 			case Request.Method.PUT:
 			default:
-				return stringBuilder.toString();
+				return url;
 		}
 	}
 

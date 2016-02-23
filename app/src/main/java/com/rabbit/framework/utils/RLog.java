@@ -14,11 +14,11 @@ public class RLog {
 
 	private final static String TAG = "Rabbit";
 	private final static int LOG_TEXT_MAX_LENGTH = 4000;
-	private final static boolean VERBOSE_ENABLED = BuildConfig.LOG_LEVEL >= Log.VERBOSE;
-	private final static boolean DEBUG_ENABLED = BuildConfig.LOG_LEVEL >= Log.DEBUG;
-	private final static boolean INFO_ENABLED = BuildConfig.LOG_LEVEL >= Log.INFO;
-	private final static boolean WARN_ENABLED = BuildConfig.LOG_LEVEL >= Log.WARN;
-	private final static boolean ERROR_ENABLED = BuildConfig.LOG_LEVEL >= Log.ERROR;
+	private final static boolean VERBOSE_ENABLED = BuildConfig.LOG_LEVEL <= Log.VERBOSE;
+	private final static boolean DEBUG_ENABLED = BuildConfig.LOG_LEVEL <= Log.DEBUG;
+	private final static boolean INFO_ENABLED = BuildConfig.LOG_LEVEL <= Log.INFO;
+	private final static boolean WARN_ENABLED = BuildConfig.LOG_LEVEL <= Log.WARN;
+	private final static boolean ERROR_ENABLED = BuildConfig.LOG_LEVEL <= Log.ERROR;
 
 
 	public static void v(Object message) {

@@ -2,9 +2,11 @@
 	package="com.rabbit.framework"
 	xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<!-- Google Analytics required permissions -->
+	<!-- Umeng Analytics required permissions -->
 	<uses-permission android:name="android.permission.INTERNET"/>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
 	<!-- Optional permission for reliable local dispatching on non-Google Play devices -->
 	<uses-permission android:name="android.permission.WAKE_LOCK"/>
@@ -29,6 +31,9 @@
 		<activity android:name=".activities.ButterKnifeSampleActivity"/>
 		<activity android:name=".activities.EventbusSampleActivity" />
 		<activity android:name=".activities.VolleySampleActivity" />
+
+		<meta-data android:name="UMENG_APPKEY" android:value="56cad3c067e58e80e3002317"></meta-data>
+		<meta-data android:name="UMENG_CHANNEL" android:value="${FLAVOR}"></meta-data>
 	</application>
 
 </manifest>

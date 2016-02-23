@@ -12,6 +12,7 @@ android {
         versionCode 1
         versionName "1.0"
         buildConfigField('String', 'API_VERSION', '\"v' + versionName + '\"')
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
 
@@ -48,8 +49,21 @@ android {
     }
 
     productFlavors {
+        yingyongbao {}
+        m360 {}
 
+    }
 
+    applicationVariants.all { variant ->
+        if (variant.getName() == "yingyongbao"){
+            variant.buildConfigField('String', 'FLAVOR', '\"yingyongbao\"')
+            variant.manifestPlaceholders = ['FLAVOR': 'yingyongbao']
+            variant.applicationIdSuffix = ".yingyongbao"
+        } else if (variant.getName() == "m360"){
+            variant.buildConfigField('String', 'FLAVOR', '\"baidu\"')
+            variant.manifestPlaceholders = ['FLAVOR': 'baidu']
+            variant.applicationIdSuffix = ".m360"
+        }
     }
 
 }
@@ -69,7 +83,11 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta3'
     compile 'com.squareup.picasso:picasso:2.5.2'
 
+    compile 'com.umeng.analytics:analytics:latest.integration'
+
     testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:1.9.5'
+    testCompile "org.robolectric:robolectric:3.0"
     testCompile 'com.squareup.okhttp3:mockwebserver:3.0.1'
 
 
