@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.android.volley.toolbox.RabbitVolley;
 import com.rabbit.framework.config.RabbitConfig;
+import com.rabbit.framework.utils.RLog;
 
 /**
  * @author miaohd
@@ -19,6 +20,7 @@ public class RabbitApplication extends Application {
 		RabbitConfig.getInstance();
 		// init network volley
 		RabbitVolley.newRequestQueue(this);
+		RLog.d(BuildConfig.FLAVOR);
 
 	}
 

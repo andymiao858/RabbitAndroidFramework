@@ -2,6 +2,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
+
+    signingConfigs {
+        debug {
+            storeFile file('keystore/debug.keystore')
+        }
+
+        release {}
+    }
+
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
@@ -22,6 +31,7 @@ android {
             manifestPlaceholders = ['APP_NAME': 'Rabbit-Debug']
             buildConfigField('com.rabbit.framework.config.PhaseEnum', 'PHASE', 'com.rabbit.framework.config.PhaseEnum.ALPHA')
             buildConfigField('int', 'LOG_LEVEL', 'android.util.Log.VERBOSE')
+            signingConfig signingConfigs.debug
         }
 
         alpha {
@@ -29,6 +39,7 @@ android {
             manifestPlaceholders = ['APP_NAME': 'Rabbit-α']
             buildConfigField('com.rabbit.framework.config.PhaseEnum', 'PHASE', 'com.rabbit.framework.config.PhaseEnum.ALPHA')
             buildConfigField('int', 'LOG_LEVEL', 'android.util.Log.VERBOSE')
+            signingConfig signingConfigs.debug
         }
 
         beta {
@@ -36,6 +47,7 @@ android {
             manifestPlaceholders = ['APP_NAME': 'Rabbit-β']
             buildConfigField('com.rabbit.framework.config.PhaseEnum', 'PHASE', 'com.rabbit.framework.config.PhaseEnum.BETA')
             buildConfigField('int', 'LOG_LEVEL', 'android.util.Log.VERBOSE')
+            signingConfig signingConfigs.debug
         }
 
         release {
@@ -43,29 +55,47 @@ android {
             manifestPlaceholders = ['APP_NAME': 'Rabbit']
             buildConfigField('com.rabbit.framework.config.PhaseEnum', 'PHASE', 'com.rabbit.framework.config.PhaseEnum.RELEASE')
             buildConfigField('int', 'LOG_LEVEL', 'android.util.Log.ERROR')
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            minifyEnabled true
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
     productFlavors {
-        yingyongbao {}
-        m360 {}
+        yingyongbao {
+            manifestPlaceholders = ['FLAVOR': 'yingyongbao']
+            applicationIdSuffix = ".yingyongbao"
+        }
+        m360 {
+            manifestPlaceholders = ['FLAVOR': 'baidu']
+            applicationIdSuffix = ".m360"
+        }
 
     }
 
     applicationVariants.all { variant ->
         if (variant.getName() == "yingyongbao"){
             variant.buildConfigField('String', 'FLAVOR', '\"yingyongbao\"')
-            variant.manifestPlaceholders = ['FLAVOR': 'yingyongbao']
-            variant.applicationIdSuffix = ".yingyongbao"
+
         } else if (variant.getName() == "m360"){
             variant.buildConfigField('String', 'FLAVOR', '\"baidu\"')
-            variant.manifestPlaceholders = ['FLAVOR': 'baidu']
-            variant.applicationIdSuffix = ".m360"
         }
     }
 
+}
+
+
+def Properties props = new Properties()
+def propFile = rootProject.file('signing.properties')
+if (propFile.canRead()){
+    props.load(new FileInputStream(propFile))
+    if (props.containsKey('STORE_FILE') && props.containsKey('STORE_PASSWORD') &&
+            props.containsKey('KEY_ALIAS') && props.containsKey('KEY_PASSWORD')) {
+        android.signingConfigs.release.storeFile file(props['STORE_FILE'])
+        android.signingConfigs.release.storePassword props['STORE_PASSWORD']
+        android.signingConfigs.release.keyAlias props['KEY_ALIAS']
+        android.signingConfigs.release.keyPassword props['KEY_PASSWORD']
+    }
 }
 
 dependencies {
