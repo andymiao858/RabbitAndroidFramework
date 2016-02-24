@@ -64,11 +64,9 @@ android {
     productFlavors {
         yingyongbao {
             manifestPlaceholders = ['FLAVOR': 'yingyongbao']
-            applicationIdSuffix = ".yingyongbao"
         }
         m360 {
             manifestPlaceholders = ['FLAVOR': 'baidu']
-            applicationIdSuffix = ".m360"
         }
 
     }
