@@ -66,17 +66,17 @@ android {
             manifestPlaceholders = ['FLAVOR': 'yingyongbao']
         }
         m360 {
-            manifestPlaceholders = ['FLAVOR': 'baidu']
+            manifestPlaceholders = ['FLAVOR': 'm360']
         }
 
     }
 
     applicationVariants.all { variant ->
         if (variant.getName() == "yingyongbao"){
-            variant.buildConfigField('String', 'FLAVOR', '\"yingyongbao\"')
+            variant.buildConfigField('String', 'FLAVOR', '\"' + variant.getName() + '\"')
 
         } else if (variant.getName() == "m360"){
-            variant.buildConfigField('String', 'FLAVOR', '\"baidu\"')
+            variant.buildConfigField('String', 'FLAVOR', '\"' + variant.getName() + '\"')
         }
 
         variant.outputs.each { output ->

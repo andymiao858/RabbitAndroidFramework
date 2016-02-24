@@ -16,11 +16,29 @@
 package com.rabbit.framework.activities;
 
 import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
+
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * @author miaohd
  */
-public class BaseActivity extends Activity {
+public abstract class BaseActivity extends AppCompatActivity {
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onPageStart(getPageName());
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPageEnd(getPageName());
+		MobclickAgent.onPause(this);
+	}
+
+	protected abstract String getPageName();
 
 }

@@ -31,8 +31,14 @@
 		<activity android:name=".activities.ButterKnifeSampleActivity"/>
 		<activity android:name=".activities.EventbusSampleActivity" />
 		<activity android:name=".activities.VolleySampleActivity" />
+		<activity android:name=".activities.AnalyticsHome" />
 
-		<meta-data android:name="UMENG_APPKEY" android:value="56cad3c067e58e80e3002317"></meta-data>
+		<!-- Analytics start -->
+		<activity android:name=".activities.WebviewAnalytic" />
+		<activity android:name=".activities.FragmentStack" />
+		<activity android:name=".activities.FragmentTabs" />
+
+		<meta-data android:name="UMENG_APPKEY" android:value="@string/app_key"></meta-data>
 		<meta-data android:name="UMENG_CHANNEL" android:value="${FLAVOR}"></meta-data>
 	</application>
 

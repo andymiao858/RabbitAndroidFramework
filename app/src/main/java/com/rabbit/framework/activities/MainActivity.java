@@ -80,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
 	String[] ITEM = new String[]{
 			ButterKnifeSampleActivity.class.getSimpleName(),
 			EventbusSampleActivity.class.getSimpleName(),
-			VolleySampleActivity.class.getSimpleName()
+			VolleySampleActivity.class.getSimpleName(),
+			AnalyticsHome.class.getSimpleName()
 	};
 
 }
