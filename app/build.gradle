@@ -19,7 +19,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         buildConfigField('String', 'API_VERSION', '\"v' + versionName + '\"')
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -77,6 +77,11 @@ android {
 
         } else if (variant.getName() == "m360"){
             variant.buildConfigField('String', 'FLAVOR', '\"baidu\"')
+        }
+
+        variant.outputs.each { output ->
+            def fileName = "rabbit-" + defaultConfig.versionName + "-" + variant.productFlavors[0].name + "-" + variant.buildType.name + ".apk"
+            output.packageApplication.outputFile = new File(output.packageApplication.outputFile.parent, fileName)
         }
     }
 
