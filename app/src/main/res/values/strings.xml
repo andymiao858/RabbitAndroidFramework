@@ -1,9 +1,10 @@
 <resources>
 	<string name="app_name">RabbitAndroidFramework</string>
+	<string name="getui_silent_time_start">23</string>
+	<string name="getui_duration">10</string>
+
 	<string name="action_settings">Settings</string>
 	<string name="content_text">Hello World!\nHello Rabbit\nHappy NewYear\nAndroid\nIOS\nWindows Phone\nXiaomi</string>
-	<string name="app_key">56cad3c067e58e80e3002317</string>
-
 	<string name="online_config">OnlineConfig</string>
 	<string name="make_crash">Make me crash!!</string>
 	<string name="kv_event">K-V Event</string>

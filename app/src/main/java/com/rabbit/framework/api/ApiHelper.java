@@ -23,9 +23,8 @@ import com.android.volley.toolbox.RabbitGsonRequest;
 import com.android.volley.toolbox.RabbitStringRequest;
 import com.android.volley.toolbox.RabbitVolley;
 import com.rabbit.framework.config.RabbitConfig;
-import com.rabbit.framework.utils.StringUtils;
+import com.rabbit.framework.utils.StringUtil;
 
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -80,12 +79,12 @@ public final class ApiHelper {
 
 	public static String buildUrl(int method, String uri, Map<String, String> params) {
 		String url;
-		if (StringUtils.isBlank(uri)){
+		if (StringUtil.isBlank(uri)){
 			url = URL_PREFIX;
 		}else {
 			Uri parseUri = Uri.parse(uri);
 			String scheme = parseUri.getScheme();
-			if (StringUtils.isBlank(scheme)){
+			if (StringUtil.isBlank(scheme)){
 				url = URL_PREFIX + uri;
 			}else {
 				url = uri;

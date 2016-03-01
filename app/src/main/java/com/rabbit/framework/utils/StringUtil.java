@@ -18,7 +18,7 @@ package com.rabbit.framework.utils;
 /**
  * @author miaohd
  */
-public class StringUtils {
+public class StringUtil {
 
 	public static boolean isBlank(final String str) {
 		int strLen;

@@ -13,6 +13,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.bumptech.glide.Glide;
+import com.igexin.sdk.PushManager;
 import com.rabbit.framework.R;
 
 
@@ -52,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
 			}
 		});
-
 	}
 
 	@Override
@@ -77,11 +78,14 @@ public class MainActivity extends AppCompatActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
+
 	String[] ITEM = new String[]{
 			ButterKnifeSampleActivity.class.getSimpleName(),
 			EventbusSampleActivity.class.getSimpleName(),
 			VolleySampleActivity.class.getSimpleName(),
-			AnalyticsHome.class.getSimpleName()
+			GlideDemoActivity.class.getSimpleName(),
+			AnalyticsHome.class.getSimpleName(),
+			GetuiDemoActivity.class.getSimpleName()
 	};
 
 }

@@ -12,10 +12,11 @@ import android.widget.TextView;
 import com.rabbit.framework.R;
 import com.rabbit.framework.models.event.IncrementMessageEvent;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import de.greenrobot.event.EventBus;
 
 
 /**

@@ -14,13 +14,16 @@ import com.rabbit.framework.models.event.IncrementMessageEvent;
 import com.rabbit.framework.models.event.MessageEvent;
 import com.rabbit.framework.utils.RLog;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
  * @author miaohd
  */
-public class EventbusSecondFragment extends BaseSubscriberFragment implements IEventBusHandler.IMainThreadHandler{
+public class EventbusSecondFragment extends BaseEventFragment implements IEventBusHandler{
 
 	@NonNull
 	@Bind(R.id.eventbus_frag1_text2)
@@ -41,7 +44,8 @@ public class EventbusSecondFragment extends BaseSubscriberFragment implements IE
 	}
 
 	@Override
-	public void onEventMainThread(MessageEvent messageEvent) {
+	@Subscribe(threadMode = ThreadMode.MAIN)
+	public void onEvent(MessageEvent messageEvent) {
 		RLog.d("EventbusSecondFragment received messageEvent data --> " + messageEvent.getData().toString());
 		if (messageEvent instanceof IncrementMessageEvent){
 			int number = ((IncrementMessageEvent)messageEvent).getData();

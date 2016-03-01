@@ -15,7 +15,6 @@
  */
 package com.rabbit.framework.activities;
 
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 
 import com.umeng.analytics.MobclickAgent;
@@ -39,6 +38,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 		MobclickAgent.onPause(this);
 	}
 
-	protected abstract String getPageName();
+	protected String getPageName(){
+		return this.getClass().getSimpleName();
+	}
 
 }

@@ -3,26 +3,39 @@ package com.rabbit.framework.models.event;
 /**
  * @author miaohd
  */
-public abstract class MessageEvent<T> {
+public class MessageEvent<T> {
 
-	public enum Action{
+	public enum EventAction {
 		CREATE, UPDATE, DELETE, GET, NONE
 	}
 
-	T t;
-	Action action;
+	public enum EventType{
+		CLIENTID, NONE
+	}
 
-	public MessageEvent(T t, Action action){
+	T t;
+	EventAction eventAction;
+	EventType eventType;
+
+	public MessageEvent(T t, EventAction eventAction, EventType eventType){
 		this.t = t;
-		this.action = action;
+		this.eventAction = eventAction;
+		this.eventType = eventType;
 	}
 
 	public MessageEvent(T t){
-		this(t, Action.NONE);
+		this(t, EventAction.NONE, EventType.NONE);
 	}
 
 	public T getData(){
 		return t;
 	}
 
+	public EventAction getEventAction() {
+		return eventAction;
+	}
+
+	public EventType getEventType() {
+		return eventType;
+	}
 }
