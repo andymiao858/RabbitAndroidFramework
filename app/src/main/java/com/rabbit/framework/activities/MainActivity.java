@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
 			EventbusSampleActivity.class.getSimpleName(),
 			VolleySampleActivity.class.getSimpleName(),
 			GlideDemoActivity.class.getSimpleName(),
+			DownUploadDemoActivity.class.getSimpleName(),
 			AnalyticsHome.class.getSimpleName(),
 			GetuiDemoActivity.class.getSimpleName()
 	};

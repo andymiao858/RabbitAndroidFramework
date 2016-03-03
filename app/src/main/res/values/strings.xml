@@ -19,4 +19,5 @@
 	<string name="flush_cache">send cache message ,right now !</string>
 	<string name="signin">signin</string>
 	<string name="signoff">signoff</string>
+	<string name="download_url">Download Url</string>
 </resources>

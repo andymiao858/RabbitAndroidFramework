@@ -55,11 +55,9 @@
 		<activity android:name=".activities.EventbusSampleActivity" />
 		<activity android:name=".activities.VolleySampleActivity" />
 		<activity android:name=".activities.GlideDemoActivity" />
+		<activity android:name=".activities.DownUploadDemoActivity" />
 		<activity android:name=".activities.AnalyticsHome" />
 		<activity android:name=".activities.GetuiDemoActivity" />
-
-
-
 
 		<!-- Analytics start -->
 		<activity android:name=".activities.WebviewAnalytic" />
