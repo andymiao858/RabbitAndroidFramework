@@ -40,6 +40,7 @@ public class RabbitApplication extends Application {
 //		Glide.get(this).register(GlideUrl.class, InputStream.class, new VolleyUrlLoader.Factory(requestQueue));
 		// Glide integrate with Okhttp3
 //		Glide.get(this).register(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(new OkHttpClient()));
+//		UploadService.NAMESPACE = BuildConfig.APPLICATION_ID;
 	}
 
 	private void initPush(){

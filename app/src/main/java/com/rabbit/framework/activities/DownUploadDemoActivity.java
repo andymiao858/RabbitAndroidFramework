@@ -18,9 +18,13 @@ package com.rabbit.framework.activities;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.rabbit.framework.R;
 import com.rabbit.framework.managers.RabbitDownloadManager;
+import com.rabbit.framework.managers.VolleyFileTransferManager;
 import com.rabbit.framework.models.bo.DownloadBo;
+import com.rabbit.framework.network.volley.DownloadRequest;
 import com.rabbit.framework.utils.RLog;
 
 import java.util.Random;
@@ -34,14 +38,35 @@ import butterknife.OnClick;
  */
 public class DownUploadDemoActivity extends BaseActivity {
 
-	@Bind(R.id.download_btn)
-	Button downloadBtn;
+	@Bind(R.id.download_manager_btn)
+	Button downloadManagerBtn;
 
-	@OnClick(R.id.download_btn)
-	void onClickDownloadBtn() {
+	@Bind(R.id.download_volley_btn)
+	Button downloadVolleyBtn;
+
+
+	@OnClick(R.id.download_manager_btn)
+	void onClickDownloadManagerBtn() {
 		DownloadBo downloadBo = new DownloadBo("http://www.ti.com/lit/ds/symlink/adc0804-n.pdf", "/RabbitAndroidFramework", "doc-"
 			+ new Random().nextInt(100) + ".pdf");
 		RabbitDownloadManager.getInstance().newDownloadRequest(downloadBo, downloadCompleteListener, "adc0804", "datasheet");
+	}
+
+	@OnClick(R.id.download_volley_btn)
+	void onClickDownloadVolleyBtn(){
+		DownloadBo downloadBo = new DownloadBo("http://www.ti.com/lit/ds/symlink/adc0804-n.pdf", "/mnt/sdcard/RabbitAndroidFramework", "doc-"
+				+ new Random().nextInt(100) + ".pdf");
+		VolleyFileTransferManager.getInstance().newDownloadRequest(downloadBo, new Response.Listener() {
+			@Override
+			public void onResponse(Object response) {
+				RLog.d("Volley Download Success.");
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+
+			}
+		});
 	}
 
 	@Override
@@ -53,12 +78,12 @@ public class DownUploadDemoActivity extends BaseActivity {
 
 	private RabbitDownloadManager.DownloadCompleteListener downloadCompleteListener = new RabbitDownloadManager.DownloadCompleteListener() {
 		@Override
-		public void onSuccess() {
-			RLog.d("Download Success");
+		public void onSuccess(DownloadBo downloadBo) {
+			RLog.d("Manager Download Success");
 		}
 
 		@Override
-		public void onFail() {
+		public void onFail(DownloadBo downloadBo) {
 			RLog.e("Download Fail");
 		}
 	};

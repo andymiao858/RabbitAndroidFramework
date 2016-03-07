@@ -25,13 +25,15 @@ public class RabbitDownloadManager {
 
 	private final Context context;
 
-	private LongSparseArray<DownloadCompleteListener> downloadReference = new LongSparseArray<>();
+	private LongSparseArray<DownloadCompleteListener> downloadListners = new LongSparseArray<>();
+
+	private LongSparseArray<DownloadBo> downloadBos = new LongSparseArray<>();
 
 	private DownloadManager downloadManager;
 
 	public interface DownloadCompleteListener{
-		public void onSuccess();
-		public void onFail();
+		public void onSuccess(DownloadBo downloadBo);
+		public void onFail(DownloadBo downloadBo);
 	}
 
 	private RabbitDownloadManager(){
@@ -69,15 +71,17 @@ public class RabbitDownloadManager {
 		}
 		request.setDestinationInExternalPublicDir(downloadBo.getDirectory(), downloadBo.getFileName());
 		long downloadId = downloadManager.enqueue(request);
+		downloadBos.put(downloadId, downloadBo);
 		if (listener != null){
-			downloadReference.put(downloadId, listener);
+			downloadListners.put(downloadId, listener);
 		}
 		return downloadId;
 	}
 
 	public void cancelDownload(long downloadRef){
 		downloadManager.remove(downloadRef);
-		downloadReference.remove(downloadRef);
+		downloadListners.remove(downloadRef);
+		downloadBos.remove(downloadRef);
 	}
 
 
@@ -87,7 +91,8 @@ public class RabbitDownloadManager {
 			String action = intent.getAction();
 			if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)){
 				long downloadId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-				DownloadCompleteListener listener = downloadReference.get(downloadId);
+				DownloadCompleteListener listener = downloadListners.get(downloadId);
+				DownloadBo downloadBo = downloadBos.get(downloadId);
 				if (listener != null){
 					DownloadManager.Query query = new DownloadManager.Query();
 					query.setFilterById(downloadId);
@@ -95,13 +100,14 @@ public class RabbitDownloadManager {
 					if (cursor.moveToFirst()){
 						int columnIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS);
 						if (DownloadManager.STATUS_SUCCESSFUL == cursor.getInt(columnIndex)){
-							listener.onSuccess();
+							listener.onSuccess(downloadBo);
 						} else if (DownloadManager.STATUS_FAILED == cursor.getInt(columnIndex)){
-							listener.onFail();
+							listener.onFail(downloadBo);
 						}
 					}
 					cursor.close();
-					downloadReference.remove(downloadId);
+					downloadListners.remove(downloadId);
+					downloadBos.remove(downloadId);
 				}
 
 			}

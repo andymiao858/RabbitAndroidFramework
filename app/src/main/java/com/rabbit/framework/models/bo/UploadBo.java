@@ -15,10 +15,29 @@
  */
 package com.rabbit.framework.models.bo;
 
+import java.io.File;
+
 /**
  * @author miaohd
  */
 public class UploadBo {
 
+	public static final String FILE_KEY = "file_key";
 
+	private File file;
+
+	private String url;
+
+	public UploadBo(File file, String url) {
+		this.file = file;
+		this.url = url;
+	}
+
+	public File getFile() {
+		return file;
+	}
+
+	public String getUrl() {
+		return url;
+	}
 }

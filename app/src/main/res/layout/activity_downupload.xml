@@ -12,18 +12,26 @@
 		android:text="Download Url: http://www.ti.com/lit/ds/symlink/adc0804-n.pdf"/>
 
 	<Button
-		android:id="@+id/download_btn"
+		android:id="@+id/download_manager_btn"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_below="@id/download_url"
+		android:text="Manager Download"/>
+
+	<Button
+		android:id="@+id/download_volley_btn"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_toRightOf="@id/download_manager_btn"
+		android:layout_alignBaseline="@id/download_manager_btn"
 		android:layout_centerHorizontal="true"
-		android:text="Download"/>
-	
+		android:text="Volley Download"/>
+
 	<ImageView
 		android:id="@+id/download_image"
 		android:layout_width="200dp"
 		android:layout_height="200dp"
-		android:layout_below="@id/download_btn"
+		android:layout_below="@id/download_manager_btn"
 		android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
